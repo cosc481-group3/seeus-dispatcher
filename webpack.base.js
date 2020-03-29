@@ -1,4 +1,3 @@
-const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin');
 const path = require('path');
 
 function srcPaths(src) {
