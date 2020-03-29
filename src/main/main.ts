@@ -13,8 +13,9 @@ function createWindow(): void {
     height: 600,
     width: 800,
     webPreferences: {
-      webSecurity: false,
-      devTools: process.env.NODE_ENV !== 'production'
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      devTools: process.env.NODE_ENV !== 'production',
     }
   });
 
