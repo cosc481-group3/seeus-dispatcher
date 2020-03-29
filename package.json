@@ -4,13 +4,11 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-
     "startElectron": "electron dist/main.bundle.js",
     "devBuildAll": "cross-env NODE_ENV=development webpack --config webpack.all.js --progress --colors",
     "watchRenderer": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch --progress --colors",
-    "watch": "npm-run-all clean devBuildAll --parallel startElectron watchRenderer && echo 'Done'",
+    "dev": "npm-run-all clean devBuildAll --parallel startElectron watchRenderer",
     "prod": "yarn clean && cross-env NODE_ENV=production webpack --progress --colors",
-
     "test": "mocha -r ts-node/register -r tsconfig-paths/register '**/*.test.ts'",
     "build:win": "electron-builder build --win --x64",
     "build:mac": "electron-builder build --mac --x64"
@@ -49,6 +47,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "@fluentui/react": "^7.105.5",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "electron": "^6.0.8",
