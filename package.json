@@ -5,9 +5,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "startElectron": "cross-env NODE_ENV=development electron dist/main.index.js",
-    "devBuildAll": "cross-env NODE_ENV=development webpack --config webpack.all.js --progress --colors",
+    "devBuildMain": "cross-env NODE_ENV=development webpack --config webpack.main.js --progress --colors",
     "watchRenderer": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch --progress --colors",
-    "dev": "npm-run-all clean devBuildAll --parallel startElectron watchRenderer",
+    "dev": "npm-run-all clean devBuildMain --parallel startElectron watchRenderer",
     "prod": "yarn clean && cross-env NODE_ENV=production webpack --progress --colors",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register '**/*.test.ts'",
     "build:win": "electron-builder build --win --x64",

@@ -4,6 +4,7 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import fs from 'fs';
 
 let mainWindow: Electron.BrowserWindow | null;
 
@@ -18,6 +19,7 @@ function createWindow(): void {
       devTools: process.env.NODE_ENV !== 'production',
     }
   });
+  reloadWindowAfterBuild(mainWindow);
 
   // and load the index.html of the app.
   mainWindow.loadURL(
@@ -46,9 +48,9 @@ app.on('ready', createWindow);
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  // if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin') {
     app.quit();
-  // }
+  }
 });
 
 app.on('activate', () => {
@@ -59,5 +61,30 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
+function reloadWindowAfterBuild(window: BrowserWindow) {
+    if(process.env.NODE_ENV !== 'development') {
+        return;
+    }
+    let timeout: NodeJS.Timeout;
+    checkBundleFile().then(() => {
+        window.reload();
+    }).catch((err) => {
+        if(err.code === 'ENOENT') {
+            window.setTitle('Waiting for build to finish...');
+            clearTimeout(timeout);
+            timeout = setTimeout(() => reloadWindowAfterBuild(window), 1000);
+        } else {
+            console.error(err);
+        }
+    });
+}
+
+function checkBundleFile(filePath = './renderer.bundle.js') {
+    const bundlePath = path.resolve(__dirname, filePath);
+    return new Promise((resolve, reject) => {
+        fs.readFile(bundlePath, (err, data) => {
+            if(err) reject(err);
+            else resolve();
+        });
+    });
+}

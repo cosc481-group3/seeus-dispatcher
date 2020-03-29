@@ -7,9 +7,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          SEEUS
         </p>
-        <PrimaryButton>I am a button.</PrimaryButton>
+        <PrimaryButton onClick={() => window.close()}>Close Window</PrimaryButton>
       </header>
     </div>
   );
