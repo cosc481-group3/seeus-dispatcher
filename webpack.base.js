@@ -4,15 +4,15 @@ function srcPaths(src) {
   return path.join(__dirname, src);
 }
 
-const isEnvProduction = process.env.NODE_ENV === 'production';
-const isEnvDevelopment = process.env.NODE_ENV === 'development';
+const NODE_ENV = process.env.NODE_ENV;
+const isEnvDevelopment = NODE_ENV === 'development';
 
 module.exports = {
   devServer: {
     writeToDisk: true
   },
   devtool: isEnvDevelopment ? 'source-map' : false,
-  mode: isEnvProduction ? 'production' : 'development',
+  mode: NODE_ENV,
   output: { path: srcPaths('dist') },
   node: { __dirname: false, __filename: false },
   resolve: {

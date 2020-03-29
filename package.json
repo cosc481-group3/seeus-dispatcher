@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "startElectron": "electron dist/main.bundle.js",
+    "startElectron": "cross-env NODE_ENV=development electron dist/main.index.js",
     "devBuildAll": "cross-env NODE_ENV=development webpack --config webpack.all.js --progress --colors",
     "watchRenderer": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch --progress --colors",
     "dev": "npm-run-all clean devBuildAll --parallel startElectron watchRenderer",
@@ -18,8 +18,11 @@
     "@types/mocha": "^5.2.7",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.5",
+    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^5.2.1",
     "css-loader": "^1.0.1",
+    "electron-reload": "^1.5.0",
+    "electron-reloader": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-import-resolver-webpack": "^0.11.1",
@@ -42,7 +45,8 @@
     "tslint-microsoft-contrib": "^5.2.1",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "@fluentui/react": "^7.105.5",
