@@ -1,7 +1,7 @@
 const path = require('path');
 
-// Set up auto reload to reload the window when files change
-console.log('[main index.js] Will auto reload window on file change via electron-reload');
+// Set up auto reload to reload the process when any main files change
+console.log('Will auto reload main process on file change');
 require('electron-reload')(__dirname, {
     electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron')
 });

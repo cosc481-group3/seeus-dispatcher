@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "devStartElectron": "cross-env NODE_ENV=development electron dist/main.dev-index.js",
+    "devStartElectron": "cross-env NODE_ENV=development electron dist/dev-main.js",
     "devBuildMain": "cross-env NODE_ENV=development webpack --config webpack.main.js --progress --colors",
     "devWatchRenderer": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch --progress --colors",
     "start": "npm-run-all clean devBuildMain --parallel devStartElectron devWatchRenderer",

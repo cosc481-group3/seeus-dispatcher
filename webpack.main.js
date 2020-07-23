@@ -12,8 +12,8 @@ module.exports = merge(baseConfig, {
     },
     plugins: [
         isDev && new CopyPlugin([{
-            from: './src/main/dev-index.js',
-            to: './main.dev-index.js'
+            from: './src/main/dev-main.js',
+            to: './dev-main.js'
         }])
     ]
 });
