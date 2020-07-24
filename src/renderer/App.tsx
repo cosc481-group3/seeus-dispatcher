@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
+import { Button, Intent } from '@blueprintjs/core';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <p>
           SEEUS
         </p>
-        <PrimaryButton onClick={() => window.close()}>Close Window</PrimaryButton>
+        <Button intent={Intent.SUCCESS} text="Close" onClick={window.close} />
       </header>
     </div>
   );
