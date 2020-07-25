@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './main.css';
-import App from './App';
-import {Fabric} from '@fluentui/react';
+import { FocusStyleManager } from '@blueprintjs/core';
 
-ReactDOM.render(
-    <Fabric>
-        <App/>
-    </Fabric>,
-    document.getElementById('app')
-);
+import './style/main.css';
+import App from './App';
+
+FocusStyleManager.onlyShowFocusOnTabs();
+ReactDOM.render(<App />, document.getElementById('app'));
