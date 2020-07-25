@@ -5,7 +5,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 
 module.exports = merge(baseConfig, {
-    entry: './src/renderer/entrypoint.tsx',
+    entry: './src/renderer/index.tsx',
     target: 'electron-renderer',
     output: {
         filename: 'renderer.bundle.js'
