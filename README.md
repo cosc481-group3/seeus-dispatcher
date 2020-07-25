@@ -8,7 +8,7 @@ Built with React, TypeScript, and Electron.
 
 1. Clone repo
 2. `yarn install`
-3. Start the app: `yarn dev`
+3. Start the app: `yarn start`
 
 ## Other Scripts
 - test - Run tests 
