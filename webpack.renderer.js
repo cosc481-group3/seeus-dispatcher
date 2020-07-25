@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-          template: path.resolve(__dirname, './src/renderer/index.html'),
+          template: path.resolve(__dirname, './src/renderer/public/index.html'),
         }),
         new webpack.DefinePlugin({
             "process.env": "{}",
