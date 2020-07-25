@@ -5,14 +5,14 @@ const path = require('path');
 const merge = require('webpack-merge');
 
 module.exports = merge(baseConfig, {
-    entry: './src/renderer/index.tsx',
+    entry: './src/app/index.tsx',
     target: 'electron-renderer',
     output: {
-        filename: 'renderer.bundle.js'
+        filename: 'app.bundle.js'
     },
     plugins: [
         new HtmlWebpackPlugin({
-          template: path.resolve(__dirname, './src/renderer/public/index.html'),
+          template: path.resolve(__dirname, './src/app/public/index.html'),
         }),
         new webpack.DefinePlugin({
             "process.env": "{}",

@@ -83,7 +83,7 @@ function reloadWindowAfterBuild(window: BrowserWindow) {
         });
     }
 
-    function checkBundleFile(filePath = 'renderer.bundle.js') {
+    function checkBundleFile(filePath = 'app.bundle.js') {
         const bundlePath = path.resolve(__dirname, filePath);
         return new Promise((resolve, reject) => {
             fs.readFile(bundlePath, (err, data) => {
