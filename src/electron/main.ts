@@ -65,7 +65,7 @@ function reloadWindowAfterBuild(window: BrowserWindow) {
     if (process.env.NODE_ENV !== 'development') {
         return;
     }
-    let timeout: NodeJS.Timeout;
+    let timeout: number;
 
     check();
 
