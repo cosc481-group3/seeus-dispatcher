@@ -1,7 +1,7 @@
 import React, { ReactInstance, ReactText } from 'react';
 import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
-import { HistoryOutlined, LockOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
+import { BarChartOutlined, LockOutlined, LogoutOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
 
 import logo from '../seeus-logo.png';
 
@@ -18,14 +18,14 @@ const SideHeader = styled.div`
     }
 `;
 
-export type MenuSelectHandlerProps = { key: ReactText, item: ReactInstance, domEvent: any, selectedKeys?: ReactText[] };
-export type MenuSelectHandler = (props: MenuSelectHandlerProps) => void;
+export type MenuSelectEvent = { key: ReactText, item: ReactInstance, domEvent: any, selectedKeys?: ReactText[] };
+export type MenuSelectHandler = (event: MenuSelectEvent) => void;
 
 export interface ISidebarProps {
     collapsed: boolean;
     onCollapse: (collapsed: boolean) => void;
     onMenuSelect: MenuSelectHandler;
-    selected: MenuItemKey;
+    selectedTab: MenuItemKey;
 }
 
 export enum MenuItemKey {
@@ -36,7 +36,7 @@ export enum MenuItemKey {
     Logout = "logout"
 }
 
-export default function Sidebar({ collapsed, onCollapse, onMenuSelect, selected }: ISidebarProps) {
+export default function Sidebar({ collapsed, onCollapse, onMenuSelect, selectedTab }: ISidebarProps) {
     return (
         <Layout.Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <SideHeader>
@@ -45,21 +45,21 @@ export default function Sidebar({ collapsed, onCollapse, onMenuSelect, selected 
             </SideHeader>
             <Menu theme="dark"
                   mode="inline"
-                  selectedKeys={[selected]}
+                  selectedKeys={[selectedTab]}
                   forceSubMenuRender={true}
                   onSelect={onMenuSelect}
             >
-                <Menu.Item key={MenuItemKey.Dashboard} icon={<UnorderedListOutlined/>}>
+                <Menu.Item key={MenuItemKey.Dashboard} icon={<DashboardOutlined />}>
                     Dashboard
                 </Menu.Item>
-                <Menu.Item key={MenuItemKey.History} icon={<HistoryOutlined/>}>
-                    History
+                <Menu.Item key={MenuItemKey.History} icon={<BarChartOutlined />}>
+                    Reporting
+                </Menu.Item>
+                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>} disabled>
+                    Administrator
                 </Menu.Item>
                 <Menu.Item key={MenuItemKey.User} icon={<UserOutlined/>}>
                     njohns48
-                </Menu.Item>
-                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>}>
-                    Administrator
                 </Menu.Item>
                 <Menu.Item key={MenuItemKey.Logout} icon={<LogoutOutlined/>}>
                     Logout

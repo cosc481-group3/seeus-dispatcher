@@ -3,9 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 
-import Sidebar, { MenuItemKey, MenuSelectHandlerProps } from '@/app/components/Sidebar';
-
-const {Header, Content, Footer, Sider} = Layout;
+import Sidebar, { MenuItemKey, MenuSelectEvent } from '@/app/components/Sidebar';
 
 const AppLayout = styled(Layout)`
     width: 100vw;
@@ -13,49 +11,64 @@ const AppLayout = styled(Layout)`
     display: flex;
 `;
 
-const ContentLayout = styled(Layout)`
-    background: #f5f8fa;
+const Content = styled(Layout.Content)`
+    margin: 18px;
+    padding: 16px;
+    background: #fff;
 `;
 
-const MainContainer = styled.div`
-    flex: 3;
-    padding: 15px;
+const Header = styled(Layout.Header)`
+    background: #fff;
 `;
 
-function App() {
-    const [isCollapsed, setIsCollapsed] = React.useState(false);
-    const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-    const [selectedMenuItem, setSelectedMenuItem] = React.useState(MenuItemKey.Dashboard);
+interface AppState {
+    isSidebarCollapsed: boolean;
+    isLoggedIn: boolean;
+    selectedTab: MenuItemKey;
+}
 
-    const handleMenuSelect = ({ key }: MenuSelectHandlerProps) => {
+class App extends React.Component<any, AppState> {
+    state = {
+        isSidebarCollapsed: false,
+        isLoggedIn: true,
+        selectedTab: MenuItemKey.Dashboard,
+    };
+
+    handleMenuSelect = ({ key }: MenuSelectEvent) => {
         console.log(key);
         switch(key) {
             case MenuItemKey.Logout:
-                setIsLoggedIn(false);
+                this.setState({ isLoggedIn: false });
             break;
             default:
-                setSelectedMenuItem(key as MenuItemKey);
+                this.setState({ selectedTab: key as MenuItemKey });
         }
     };
 
-    return (
-        <AppLayout>
-            <Sidebar
-                collapsed={isCollapsed}
-                onCollapse={setIsCollapsed}
-                selected={selectedMenuItem}
-                onMenuSelect={handleMenuSelect}
-            />
-            <ContentLayout>
-                {/*<Header className="site-layout-background" style={{padding: 0}}/>*/}
-                <Content style={{margin: '0 16px'}}>
-                    <div style={{padding: 24, minHeight: 360}}>
-                        { isLoggedIn ? 'Logged In' : 'Logged Out' }
-                    </div>
-                </Content>
-            </ContentLayout>
-        </AppLayout>
-    );
+    render() {
+        const { isSidebarCollapsed, selectedTab, isLoggedIn } = this.state;
+
+        if(!isLoggedIn) {
+            return (<div>Logged Out</div>);
+        }
+
+        return (
+            <AppLayout>
+                <Sidebar
+                    selectedTab={selectedTab}
+                    onMenuSelect={this.handleMenuSelect}
+                    collapsed={isSidebarCollapsed}
+                    onCollapse={(collapsed) => this.setState({ isSidebarCollapsed: collapsed })}
+                />
+                <Layout>
+                    <Header />
+                    <Content>
+                        { this.state.isLoggedIn ? 'Logged In' : 'Logged Out' }
+                    </Content>
+                </Layout>
+            </AppLayout>
+        );
+    }
 }
 
 export default App;
