@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { JSXElementConstructor, ReactComponentElement, ReactInstance } from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 
 import Sidebar, { MenuItemKey, MenuSelectEvent } from '@/app/components/Sidebar';
+import Dashboard from '@/app/views/dashboard/Dashboard';
 
 const AppLayout = styled(Layout)`
     width: 100vw;
@@ -12,13 +13,18 @@ const AppLayout = styled(Layout)`
 
 const Content = styled(Layout.Content)`
     margin: 18px;
-    padding: 16px;
-    background: #fff;
 `;
 
 const Header = styled(Layout.Header)`
     background: #fff;
 `;
+
+const tabComponents: any = {
+    [MenuItemKey.Dashboard]: Dashboard,
+    [MenuItemKey.Reporting]: Dashboard,
+    [MenuItemKey.User]: Dashboard,
+    [MenuItemKey.Admin]: Dashboard,
+};
 
 interface AppState {
     isSidebarCollapsed: boolean;
@@ -44,6 +50,11 @@ class App extends React.Component<any, AppState> {
         }
     };
 
+    renderTabContent() {
+        const Tab = tabComponents[this.state.selectedTab];
+        return <Tab />;
+    }
+
     render() {
         const { isSidebarCollapsed, selectedTab, isLoggedIn } = this.state;
 
@@ -62,7 +73,7 @@ class App extends React.Component<any, AppState> {
                 <Layout>
                     <Header />
                     <Content>
-                        { this.state.isLoggedIn ? 'Logged In' : 'Logged Out' }
+                        { this.renderTabContent() }
                     </Content>
                 </Layout>
             </AppLayout>
