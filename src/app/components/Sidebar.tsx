@@ -1,7 +1,7 @@
 import React, { ReactInstance, ReactText } from 'react';
 import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
-import { BarChartOutlined, LockOutlined, LogoutOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
+import { BarChartOutlined, DashboardOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import logo from '../seeus-logo.png';
 
@@ -30,7 +30,7 @@ export interface ISidebarProps {
 
 export enum MenuItemKey {
     Dashboard = "dashboard",
-    History = "history",
+    Reporting = "reporting",
     User = "user",
     Admin = "admin",
     Logout = "logout"
@@ -52,10 +52,10 @@ export default function Sidebar({ collapsed, onCollapse, onMenuSelect, selectedT
                 <Menu.Item key={MenuItemKey.Dashboard} icon={<DashboardOutlined />}>
                     Dashboard
                 </Menu.Item>
-                <Menu.Item key={MenuItemKey.History} icon={<BarChartOutlined />}>
+                <Menu.Item key={MenuItemKey.Reporting} icon={<BarChartOutlined />}>
                     Reporting
                 </Menu.Item>
-                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>} disabled>
+                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>} disabled={false}>
                     Administrator
                 </Menu.Item>
                 <Menu.Item key={MenuItemKey.User} icon={<UserOutlined/>}>

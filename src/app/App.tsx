@@ -1,8 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 
 import Sidebar, { MenuItemKey, MenuSelectEvent } from '@/app/components/Sidebar';
+import DashboardView from '@/app/views/dashboard/DashboardView';
+import ReportingView from '@/app/views/reporting/Reporting';
+import AdminView from '@/app/views/admin/AdminView';
+import UserView from '@/app/views/user/UserView';
 
 const AppLayout = styled(Layout)`
     width: 100vw;
@@ -12,13 +15,18 @@ const AppLayout = styled(Layout)`
 
 const Content = styled(Layout.Content)`
     margin: 18px;
-    padding: 16px;
-    background: #fff;
 `;
 
 const Header = styled(Layout.Header)`
     background: #fff;
 `;
+
+const tabComponents: any = {
+    [MenuItemKey.Dashboard]: DashboardView,
+    [MenuItemKey.Reporting]: ReportingView,
+    [MenuItemKey.User]: UserView,
+    [MenuItemKey.Admin]: AdminView,
+};
 
 interface AppState {
     isSidebarCollapsed: boolean;
@@ -44,6 +52,11 @@ class App extends React.Component<any, AppState> {
         }
     };
 
+    renderTabContent() {
+        const Tab = tabComponents[this.state.selectedTab];
+        return <Tab />;
+    }
+
     render() {
         const { isSidebarCollapsed, selectedTab, isLoggedIn } = this.state;
 
@@ -62,7 +75,7 @@ class App extends React.Component<any, AppState> {
                 <Layout>
                     <Header />
                     <Content>
-                        { this.state.isLoggedIn ? 'Logged In' : 'Logged Out' }
+                        { this.renderTabContent() }
                     </Content>
                 </Layout>
             </AppLayout>
