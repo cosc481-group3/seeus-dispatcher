@@ -1,4 +1,3 @@
-import React, { JSXElementConstructor, ReactComponentElement, ReactInstance } from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 
