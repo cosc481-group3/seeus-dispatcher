@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
           template: path.resolve(__dirname, './src/app/public/index.html'),
         }),
         new webpack.DefinePlugin({
-            "process.env": "{}",
+            'process.env': '{}',
             global: {}
         }),
     ]
