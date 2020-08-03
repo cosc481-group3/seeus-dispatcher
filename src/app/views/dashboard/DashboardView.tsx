@@ -8,16 +8,17 @@ const COLUMNS = [
     { title: 'Name', dataIndex: 'name'},
 ];
 
-export default class Dashboard extends React.Component<any, any> {
+export default class DashboardView extends React.Component<{}, {}> {
     state = {
         data: [
             { location: 'test', destination: 'test', eid: 1361232, name: 'njohns48', id: 1 },
         ]
     }
+
     render() {
         return (
             <Card title="Requests">
-                <Table dataSource={this.state.data} columns={COLUMNS} bordered={true} rowKey="id" />
+                <Table dataSource={this.state.data} columns={COLUMNS} bordered={true} rowKey="id"/>
             </Card>
         );
     }

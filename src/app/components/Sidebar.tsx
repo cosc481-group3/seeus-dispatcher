@@ -55,7 +55,7 @@ export default function Sidebar({ collapsed, onCollapse, onMenuSelect, selectedT
                 <Menu.Item key={MenuItemKey.Reporting} icon={<BarChartOutlined />}>
                     Reporting
                 </Menu.Item>
-                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>} disabled>
+                <Menu.Item key={MenuItemKey.Admin} icon={<LockOutlined/>} disabled={false}>
                     Administrator
                 </Menu.Item>
                 <Menu.Item key={MenuItemKey.User} icon={<UserOutlined/>}>

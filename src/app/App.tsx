@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Layout } from 'antd';
 
 import Sidebar, { MenuItemKey, MenuSelectEvent } from '@/app/components/Sidebar';
-import Dashboard from '@/app/views/dashboard/Dashboard';
+import DashboardView from '@/app/views/dashboard/DashboardView';
+import ReportingView from '@/app/views/reporting/Reporting';
+import AdminView from '@/app/views/admin/AdminView';
+import UserView from '@/app/views/user/UserView';
 
 const AppLayout = styled(Layout)`
     width: 100vw;
@@ -20,10 +23,10 @@ const Header = styled(Layout.Header)`
 `;
 
 const tabComponents: any = {
-    [MenuItemKey.Dashboard]: Dashboard,
-    [MenuItemKey.Reporting]: Dashboard,
-    [MenuItemKey.User]: Dashboard,
-    [MenuItemKey.Admin]: Dashboard,
+    [MenuItemKey.Dashboard]: DashboardView,
+    [MenuItemKey.Reporting]: ReportingView,
+    [MenuItemKey.User]: UserView,
+    [MenuItemKey.Admin]: AdminView,
 };
 
 interface AppState {
